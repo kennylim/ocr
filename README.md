@@ -34,7 +34,8 @@ INNER JOIN ocr.job AS j ON j.job_id = b.job_id
 INNER JOIN ocr.page AS p ON p.page_id = r.page_id
 INNER JOIN ocr.document AS d ON d.document_id = p.document_id
 INNER JOIN ocr.field AS f ON f.field_id = r.field_id
-WHERE j.job_id = 1
+--WHERE j.job_id = 1
+--AND b.batch_id = 2
 GROUP BY j.job_id,
          j.job_name,
          b.batch_name,
@@ -64,6 +65,7 @@ INNER JOIN ocr.job AS j ON j.job_id = b.job_id
 INNER JOIN ocr.page AS p ON p.page_id = r.page_id
 INNER JOIN ocr.document AS d ON d.document_id = p.document_id
 INNER JOIN ocr.field AS f ON f.field_id = r.field_id
+--WHERE j.job_id = 1
 GROUP BY j.job_id
 ORDER BY job_name;
 
