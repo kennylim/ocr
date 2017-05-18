@@ -5,9 +5,10 @@ Data architecture and modeling solution for optical character recognition
 
 ## Enitity Relationship Diagram & Big Data Architecture Solution
 
-Proposed data model design enable dynamic document metadata creation. The design supports: 
-* New documents with different page metadata with different number and type of text fields 
-* Text desciptions assoicated with a unique document id.
+Proposed data model design enable dynamic document metadata creation. 
+* The design supports: 
+  * New documents with different page metadata with different number and type of text fields 
+  * Text desciptions assoicated with a unique document id.
 
 ![OCR entity relationship diagram](https://github.com/kennylim/ocr/blob/master/diagram/ocr_entity_relationship_diagram.png)
 
