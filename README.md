@@ -14,7 +14,7 @@ Proposed data model design enable dynamic document metadata creation.
 
 ![Big Data Architecture](https://github.com/kennylim/ocr/blob/master/diagram/big_data_architecture.png)
 
-## OCR dashboard SQL Examples
+## OCR Analytics Examples
 
 ```sql
 --  1a. Percentage of completion all or a specific batch associated with a job
