@@ -39,6 +39,7 @@ GROUP BY j.job_id,
          p.image_name,
          d.total_fields
 ORDER BY job_name;
+```
 
 
  job_id | job_name | batch_name |          image_name           | total_fields | total_field_processed | batch_pct_complete
@@ -51,6 +52,7 @@ ORDER BY job_name;
       1 | job 1    | batch 6    | john_sebastian_disclaimer.jpg |            4 |                     4 |                100
 
 
+```sql
 --1b. Percentage of completion all or a specific job
 
 SELECT j.job_id,
@@ -66,6 +68,7 @@ INNER JOIN ocr.document AS d ON d.document_id = p.document_id
 INNER JOIN ocr.field AS f ON f.field_id = r.field_id
 GROUP BY j.job_id
 ORDER BY job_name;
+```
 
 -- specific job
  job_id | job_name | total_fields | total_field_processed | job_pct_complete
@@ -79,6 +82,7 @@ ORDER BY job_name;
       2 | job 2    |           18 |                    18 |              100
       3 | job 3    |            5 |                     5 |              100
 
+```sql
 --2. Total time taken to digitize a job
 
 SELECT j.job_id,
@@ -91,12 +95,13 @@ WHERE batch_id IN
      FROM ocr.batch b
      WHERE job_id = 1)
 GROUP BY j.job_id;
-
+```
  job_id | job_name | job_total_time
 --------+----------+-----------------
       1 | job 1    | 00:11:58.813178
+      
 
-
+```sql
  --3. List of longest running jobs in descending order
 
 SELECT job_id,
@@ -107,6 +112,7 @@ SELECT job_id,
 FROM ocr.job
 ORDER BY job DESC;
  --limit 10;
+```
 
 
 job_id | job_name |         start_time         |         stop_time          | total_time
@@ -114,6 +120,7 @@ job_id | job_name |         start_time         |         stop_time          | to
       2 | job 2    | 2016-03-03 06:13:39.688602 | 2016-03-03 09:13:39.688602 | 03:00:00
       1 | job 1    | 2016-03-03 08:13:39.687467 | 2016-03-03 09:13:39.687467 | 01:00:00
 
+```sql
 --4.  User would want to update the values of a field in the result table.
 
 UPDATE ocr.result
@@ -121,7 +128,7 @@ SET DATA = 'donna.jones@msn.com',
            status = 'update',
            created_at = now()
 WHERE result_id = 8;
-
+```
 
 
  result_id | batch_id | page_id | field_id |      data       | status |         created_at
@@ -129,6 +136,7 @@ WHERE result_id = 8;
          8 |        2 |       2 |        3 | donna@gmail.com | insert | 2016-03-03 10:47:32.246975
 
 
+```sql
 UPDATE 1
 
 postgres=# select * from ocr.result where result_id = 8;
@@ -136,6 +144,9 @@ result_id | batch_id | page_id | field_id |      data       | status |         c
 -----------+----------+---------+----------+---------------------+--------+---------------------------
          8 |        2 |       2 |        3 | donna.jones@msn.com | update | 2016-03-03 10:52:57.21066
 
+```
+
+```sql
 --5. An admin user should be able to get the list of largest customers (in terms of fields digitized) for a month.
 
 SELECT c.customer_id,
@@ -148,12 +159,13 @@ AND date_part('month', r.created_at) = 3
 GROUP BY c.customer_id
 ORDER BY digitized_fields_by_month DESC;
  --limit 10;
-
+```
  customer_id |  name  | digitized_fields_by_month
 -------------+--------+---------------------------
            2 | zeebo  |                        45
            3 | tepher |                         5
 
+```sql
 --6. Once a year, the admin use can generate a batch job to get the list of top customers in terms of digitization for the whole year
 
 SELECT c.customer_id,
@@ -166,6 +178,7 @@ AND date_part('year', r.created_at) = 2016
 GROUP BY c.customer_id
 ORDER BY digitized_fields_by_year DESC;
  --limit 10;
+```
 
  customer_id |  name  | digitized_fields_by_year
 -------------+--------+--------------------------
